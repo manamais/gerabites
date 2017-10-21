@@ -1,9 +1,5 @@
 @extends('layouts.restrito')
 @section('content')
-
-
-
-<div class='container-fluid'>
     <div class='row'>
         <div class='col-lg-12'>
             <div class='content-box'>
@@ -376,6 +372,5 @@
             </div>
         </div>
     </div>
-</div>
 
 @endsection

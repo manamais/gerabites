@@ -1,52 +1,53 @@
 @extends('layouts.restrito')
 @section('content')
 
+<ol class="breadcrumb breadcrumb-arrow text-uppercase">
+    <li><a href='{{url('/restrito')}}'>Home</a></li>
+    <li><a href='{{url('/restrito/posts')}}'>Postagens</a></li>
+    <li class='active'>{{$titulo}}</li>
+</ol>
+
+<h3 class="section-title first-title">
+    {{$titulo}}
+    <a href='{{url("/restrito/$page/cadastrar")}}' class='btn btn-sm btn-primary pull-right'>Novo Registro</a>
+</h3>
 
 
 
 
-<div class="container-fluid">
 
-    <ol class="breadcrumb breadcrumb-arrow">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Library</a></li>
-        <li><a href="#">Media</a></li>
-        <li class="active">Data</li>
-    </ol>
+<div class="row">
+    <div class="col-lg-12">
 
+        <div class="data-info">
+            <table id="table2" class="display datatable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>EMPRESA</th>
+                        <th>FONE</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($data as $registo)
+                    <tr>
+                        <td>{{$registo->EMPR_CODIGO}}</td>
+                        <td>{{$registo->EMPR_NOMEFANTASIA}}</td>
+                        <td>{{$registo->EMPR_FONE1}}</td>
 
-    <div class="row">
-        <div class="col-lg-12">
+                        <td></td>
+                    </tr>
+                    @endforeach
 
-            <div class="data-info">
-                <table id="table2" class="display datatable">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>EMPRESA</th>
-                            <th>FONE</th>
-                            <th>#</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($data as $registo)
-                        <tr>
-                            <td>{{$registo->EMPR_CODIGO}}</td>
-                            <td>{{$registo->EMPR_NOMEFANTASIA}}</td>
-                            <td>{{$registo->EMPR_FONE1}}</td>
-
-                            <td></td>
-                        </tr>
-                        @endforeach
-
-                    </tbody>
-                </table>
-            </div>
-
-
+                </tbody>
+            </table>
         </div>
+
+
     </div>
 </div>
+
 
 
 

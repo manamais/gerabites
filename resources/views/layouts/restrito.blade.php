@@ -29,7 +29,7 @@
 
 
         <link rel='stylesheet' href='{{url('assets/restrito/bower_components/datatables/media/css/jquery.dataTables.min.css')}}'/>
-          <!--<link rel="stylesheet" href="assets/restrito/bower_components/datatables/media/css/jquery.dataTables.min.css">-->
+        <!--<link rel="stylesheet" href="assets/restrito/bower_components/datatables/media/css/jquery.dataTables.min.css">-->
         <link rel='stylesheet' href='{{url('assets/restrito/css/style.css')}}'/>
 
 
@@ -223,11 +223,11 @@
 
 
 
-
-
-            <!-- containner content -->
-            @yield('content')
-            <!-- containner content -->
+            <div class="container-fluid">
+                <!-- containner content -->
+                @yield('content')
+                <!-- containner content -->
+            </div>
 
 
 
