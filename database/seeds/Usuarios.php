@@ -34,7 +34,7 @@ class Usuarios extends Seeder {
                 [
                     'id' => 2,
                     'EMPR_CODIGO' => 1,
-                    'tipo' => 'STAF',
+                    'tipo' => 'COL',
                     'cargo' => 'COLABORADOR',
                     'name' => 'COLABORADOR BEMFUNCIONAL',
                     'matricula' => '000000',
@@ -58,7 +58,7 @@ class Usuarios extends Seeder {
                 [
                     'id' => 3,
                     'EMPR_CODIGO' => 2,
-                    'tipo' => 'CLIENT',
+                    'tipo' => 'CLI',
                     'cargo' => 'GERENTE',
                     'name' => 'Jane Doe',
                     'matricula' => '000000',

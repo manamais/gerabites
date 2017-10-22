@@ -12,6 +12,7 @@ $factory->define('App\Models\Restrito\Posts', function (Faker\Generator $faker) 
         'SUBCAT_CODIGO' => $faker->randomElement($array = array(4, 5)),
         'POS_CODIGO' => 1,
         'user_id' => 2,
+        'POST_ORDEM' => 100,
         'POST_RETRANCA' => $faker->word,
         'POST_TITULO' => $faker->sentence,
         'POST_SUBTITULO' => $faker->sentence,
@@ -21,7 +22,5 @@ $factory->define('App\Models\Restrito\Posts', function (Faker\Generator $faker) 
         'POST_TAGS_URL' => $faker->word,
         'POST_STATUS' => 'ATIVO',
         'POST_IMAGE' => '',
-        'POST_DTINICIO' => date('Y-m-d'),
-        'POST_RESSTRITAAOSUSUARIOS' => 'NÃO',
     ];
 });

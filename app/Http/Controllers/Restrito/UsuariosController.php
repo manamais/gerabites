@@ -5,20 +5,23 @@ namespace App\Http\Controllers\Restrito;
 use Illuminate\Http\Request;
 use App\Http\Controllers\StandardController;
 use App\User;
+use App\Models\Restrito\Empresa;
 use Gate;
 use Image;
 
 class UsuariosController extends StandardController {
 
     protected $model;
+    protected $empresas;
     protected $request;
     protected $page;
     protected $gate;
     protected $nomeView = 'restrito.usuarios';
     protected $redirectIndex = '/restrito/usuarios';
 
-    public function __construct(User $model, Request $request) {
+    public function __construct(User $model, Empresa $empresas, Request $request) {
         $this->model = $model;
+        $this->empresas = $empresas;
         $this->request = $request;
         $this->page = "usuarios";
         $this->titulo = "GERENCIAMENTO DOS USUÁRIOS";
@@ -30,8 +33,22 @@ class UsuariosController extends StandardController {
         if (Gate::denies("$gate")) {
             abort(403, 'Não Autorizado!');
         }
-        $data = $this->model->where('id', '>', 1)->get();
+        $data = $this->model
+                        ->leftJoin('empresas', 'empresas.EMPR_CODIGO', 'users.EMPR_CODIGO')
+                        ->where('id', '>', 1)->get();
         return view("{$this->nomeView}.index", compact('data'))
+                        ->with('page', $this->page)
+                        ->with('titulo', $this->titulo);
+    }
+
+    public function cadastrar() {
+        $gate = $this->gate;
+        if (Gate::denies("$gate")) {
+            abort(403, 'Não Autorizado!');
+        }
+
+        $empresas = $this->empresas->all();
+        return view("{$this->nomeView}.cadastrar-editar", compact('empresas'))
                         ->with('page', $this->page)
                         ->with('titulo', $this->titulo);
     }
@@ -118,7 +135,8 @@ class UsuariosController extends StandardController {
             abort(403, 'Não Autorizado!');
         }
         $data = $this->model->find($id);
-        return view("{$this->nomeView}.cadastrar-editar", compact('data'))
+        $empresas = $this->empresas->all();
+        return view("{$this->nomeView}.cadastrar-editar", compact('data','empresas'))
                         ->with('page', $this->page)
                         ->with('titulo', $this->titulo);
     }

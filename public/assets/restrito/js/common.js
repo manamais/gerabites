@@ -468,7 +468,7 @@ toastr.options = {
   "hideMethod": "hide"
 };
   
-toastr["success"]('Good to see you, Marcus!');
+//toastr["success"]('Good to see you, Marcus!');
 
   //Open/Close sidebar
   $(".menu-toggle").on("click", function(){

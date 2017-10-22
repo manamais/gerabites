@@ -12,17 +12,6 @@
     <a href='{{url("/restrito/$page/cadastrar")}}' class='btn btn-sm btn-primary pull-right'>Novo Registro</a>
 </h3>
 
-<h3 class="section-title first-title">
-    {{$titulo}}
-    <a href='{{url("/restrito/$page/cadastrar")}}' class='btn btn-sm btn-primary pull-right'>Novo Registro</a>
-</h3>
-
-
-
-
-
-
-
 <div class="row">
     <div class="col-lg-12">
 

@@ -34,6 +34,8 @@ class ConfigMidiasSociaisController extends StandardController {
             $pass = array('MS_APP_PASSW' => bcrypt($dadosForm['MS_APP_PASSW']));
             $dadosForm = array_merge($dadosForm, $pass);
         }
+        
+        
         $validator = validator($dadosForm, $this->model->rules);
         if ($validator->fails()) {
             alert()->error('Houve um erro no registro. Corrija e tente novamente!', 'Falha na inserção!')->autoclose(4500);

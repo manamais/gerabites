@@ -12,7 +12,7 @@ class ConfigMidiasSociais extends Model  implements AuditableContract
     use Auditable;
     use SoftDeletes;
 
-    protected $table = 'midias_sociais';
+    protected $table = 'config_midias_sociais';
     protected $primaryKey = 'MS_CODIGO';
     protected $fillable = ['MS_NOME', 'MS_URL', 'MS_APP_ID', 'MS_APP_PASSW',];
     public $rules = [

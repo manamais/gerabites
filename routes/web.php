@@ -160,35 +160,62 @@ Route::group(['prefix' => 'restrito', 'middleware' => ['auth']], function() {
     /* ==================== FINANCEIRO ================================= */
 
     /* TIPOS DE SAÍDA ***************************************** */
-    Route::get('debitos-tipo', 'Restrito\DebitosTipoController@index');
-    Route::get('debitos-tipo/cadastrar', 'Restrito\DebitosTipoController@cadastrar');
-    Route::post('debitos-tipo/cadastrar', 'Restrito\DebitosTipoController@cadastrarDB');
-    Route::get('debitos-tipo/editar/{id}', 'Restrito\DebitosTipoController@editar');
-    Route::post('debitos-tipo/editar/{id}', 'Restrito\DebitosTipoController@editarDB');
-    Route::post('debitos-tipo/deletar/{id}', 'Restrito\DebitosTipoController@deletar');
+    Route::get('despesas/categorias', 'Restrito\FinanceiroDespesasCategoriasController@index');
+    Route::get('despesas/categorias/cadastrar', 'Restrito\FinanceiroDespesasCategoriasController@cadastrar');
+    Route::post('despesas/categorias/cadastrar', 'Restrito\FinanceiroDespesasCategoriasController@cadastrarDB');
+    Route::get('despesas/categorias/editar/{id}', 'Restrito\FinanceiroDespesasCategoriasController@editar');
+    Route::post('despesas/categorias/editar/{id}', 'Restrito\FinanceiroDespesasCategoriasController@editarDB');
+    Route::post('despesas/categorias/deletar/{id}', 'Restrito\FinanceiroDespesasCategoriasController@deletar');
     /* DÉBITOS ***************************************** */
-    Route::get('debitos', 'Restrito\DebitosController@index');
-    Route::get('debitos/cadastrar', 'Restrito\DebitosController@cadastrar');
-    Route::post('debitos/cadastrar', 'Restrito\DebitosController@cadastrarDB');
-    Route::get('debitos/editar/{id}', 'Restrito\DebitosController@editar');
-    Route::post('debitos/editar/{id}', 'Restrito\DebitosController@editarDB');
-    Route::post('debitos/deletar/{id}', 'Restrito\DebitosController@deletar');
+    Route::get('despesas', 'Restrito\FinanceiroDespesasController@index');
+    Route::get('despesas/cadastrar', 'Restrito\FinanceiroDespesasController@cadastrar');
+    Route::post('despesas/cadastrar', 'Restrito\FinanceiroDespesasController@cadastrarDB');
+    Route::get('despesas/editar/{id}', 'Restrito\FinanceiroDespesasController@editar');
+    Route::post('despesas/editar/{id}', 'Restrito\FinanceiroDespesasController@editarDB');
+    Route::post('despesas/deletar/{id}', 'Restrito\FinanceiroDespesasController@deletar');
 
-    /* TIPOS DE RECEITAS ***************************************** */
-    Route::get('receitas-tipo', 'Restrito\ReceitasTipoController@index');
-    Route::get('receitas-tipo/cadastrar', 'Restrito\ReceitasTipoController@cadastrar');
-    Route::post('receitas-tipo/cadastrar', 'Restrito\ReceitasTipoController@cadastrarDB');
-    Route::get('receitas-tipo/editar/{id}', 'Restrito\ReceitasTipoController@editar');
-    Route::post('receitas-tipo/editar/{id}', 'Restrito\ReceitasTipoController@editarDB');
-    Route::post('receitas-tipo/deletar/{id}', 'Restrito\ReceitasTipoController@deletar');
 
-    /* RECEITAS ***************************************** */
-    Route::get('receitas', 'Restrito\ReceitasController@index');
-    Route::get('receitas/cadastrar', 'Restrito\ReceitasController@cadastrar');
-    Route::post('receitas/cadastrar', 'Restrito\ReceitasController@cadastrarDB');
-    Route::get('receitas/editar/{id}', 'Restrito\ReceitasController@editar');
-    Route::post('receitas/editar/{id}', 'Restrito\ReceitasController@editarDB');
-    Route::post('receitas/deletar/{id}', 'Restrito\ReceitasController@deletar');
+
+
+
+
+
+
+    /* DÉBITOS ***************************************** */
+    Route::get('projetos', 'Restrito\ProjetosController@index');
+    Route::get('projetos/cadastrar', 'Restrito\ProjetosController@cadastrar');
+    Route::post('projetos/cadastrar', 'Restrito\ProjetosController@cadastrarDB');
+    Route::get('projetos/editar/{id}', 'Restrito\ProjetosController@editar');
+    Route::post('projetos/editar/{id}', 'Restrito\ProjetosController@editarDB');
+    Route::post('projetos/deletar/{id}', 'Restrito\ProjetosController@deletar');
+    /* DÉBITOS ***************************************** */
+    Route::get('projetos/etapas', 'Restrito\ProjetosEtapasController@index');
+    Route::get('projetos/etapas/cadastrar', 'Restrito\ProjetosEtapasController@cadastrar');
+    Route::post('projetos/etapas/cadastrar', 'Restrito\ProjetosEtapasController@cadastrarDB');
+    Route::get('projetos/etapas/editar/{id}', 'Restrito\ProjetosEtapasController@editar');
+    Route::post('projetos/etapas/editar/{id}', 'Restrito\ProjetosEtapasController@editarDB');
+    Route::post('projetos/etapas/deletar/{id}', 'Restrito\ProjetosEtapasController@deletar');
+    /* DÉBITOS ***************************************** */
+    Route::get('projetos/{cod}/tarefas', 'Restrito\ProjetosTarefasController@tarefas');
+    Route::get('projetos/{cod}/tarefas/cadastrar', 'Restrito\ProjetosTarefasController@cadastrarTarefa');
+    Route::post('projetos/{cod}/tarefas/cadastrar', 'Restrito\ProjetosTarefasController@cadastrarTarefaDB');
+    Route::get('projetos/{cod}/tarefas/editar/{id}', 'Restrito\ProjetosTarefasController@editarTarefa');
+    Route::post('projetos/{cod}/tarefas/editar/{id}', 'Restrito\ProjetosTarefasController@editarTarefaDB');
+    Route::post('projetos/{cod}/tarefas/deletar/{id}', 'Restrito\ProjetosTarefasController@deletar');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /* BOLETOS - FATURAMENTO   ***************************************** */
     Route::get('receitas/boletos', 'Restrito\ReceitasController@listarBoletos');
@@ -211,8 +238,38 @@ Route::group(['prefix' => 'restrito', 'middleware' => ['auth']], function() {
 
 
 
-    //Route::get('/boleto', 'HomeController@boleto');
-    //Rota Inical do Dashboard
+
+
+
+
+
+
+    /* PRODUTOS E SERVICOS  ***************************************** */
+    Route::get('produtos-servicos', 'Restrito\ProdutosServicosController@index');
+    Route::get('produtos-servicos/cadastrar', 'Restrito\ProdutosServicosController@cadastrar');
+    Route::post('produtos-servicos/cadastrar', 'Restrito\ProdutosServicosController@cadastrarDB');
+    Route::get('produtos-servicos/editar/{id}', 'Restrito\ProdutosServicosController@editar');
+    Route::post('produtos-servicos/editar/{id}', 'Restrito\ProdutosServicosController@editarDB');
+    Route::post('produtos-servicos/deletar/{id}', 'Restrito\ProdutosServicosController@deletar');
+
+    /* PRODUTOS E SERVICOS  ***************************************** */
+    Route::get('impostos', 'Restrito\FinanceiroImpostosController@index');
+    Route::get('impostos/cadastrar', 'Restrito\FinanceiroImpostosController@cadastrar');
+    Route::post('impostos/cadastrar', 'Restrito\FinanceiroImpostosController@cadastrarDB');
+    Route::get('impostos/editar/{id}', 'Restrito\FinanceiroImpostosController@editar');
+    Route::post('impostos/editar/{id}', 'Restrito\FinanceiroImpostosController@editarDB');
+    Route::post('impostos/deletar/{id}', 'Restrito\FinanceiroImpostosController@deletar');
+
+
+
+
+
+
+
+
+
+
+//Rota Inical do Dashboard
     Route::get('/', 'Restrito\RestritoController@index');
 });
 

@@ -9,7 +9,8 @@ class CreateImpostosTable extends Migration {
     public function up() {
         Schema::create('impostos', function (Blueprint $table) {
             $table->increments('IMP_CODIGO');
-            $table->string('IMP_NOME', 50);
+            $table->string('IMP_NOME', 15);
+            $table->string('IMP_DESCRICAO', 80);
             $table->float('IMP_TAXA', 10, 2);
 
             $table->timestamps();

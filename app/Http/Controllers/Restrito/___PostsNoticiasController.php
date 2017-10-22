@@ -14,7 +14,7 @@ use Image;
 use Auth;
 use DB;
 
-class PostsNoticiasGeralController extends StandardController {
+class PostsNoticiasController extends StandardController {
 
     protected $model;
     protected $categorias;
@@ -25,7 +25,7 @@ class PostsNoticiasGeralController extends StandardController {
     protected $page;
     protected $gate;
     protected $nomeView = 'restrito.posts-noticias';
-    protected $redirectIndex = '/restrito/noticias-geral';
+    protected $redirectIndex = '/restrito/noticias';
 
     public function __construct(Posts $model, Categorias $categorias, SubCategorias $subcategorias, Posicoes $posicoes, User $users, Request $request) {
         $this->model = $model;
@@ -34,9 +34,9 @@ class PostsNoticiasGeralController extends StandardController {
         $this->posicoes = $posicoes;
         $this->users = $users;
         $this->request = $request;
-        $this->page = "noticias-geral";
+        $this->page = "noticias";
         $this->titulo = "GERENCIAMENTO DAS NOTÍCIAS";
-        $this->gate = 'GERENCIAMENTO-MATERIAS';
+        $this->gate = 'CRIACAO-POSTAGEM';
     }
 
     public function index() {
@@ -50,6 +50,7 @@ class PostsNoticiasGeralController extends StandardController {
                 ->leftJoin('categorias', 'categorias.CAT_CODIGO', 'subcategorias.CAT_CODIGO')
                 ->leftJoin('posicoes', 'posicoes.POS_CODIGO', 'posts.POS_CODIGO')
                 ->orderBy('POST_CODIGO', 'desc')
+                ->where('user_id', $meuID)
                 ->get();
         return view("{$this->nomeView}.index", compact('data'))
                         ->with('page', $this->page)
@@ -105,6 +106,9 @@ class PostsNoticiasGeralController extends StandardController {
         $dadosForm = array_merge($dadosForm, $slug);
         $user_id = array('user_id' => Auth::user()->id);
         $dadosForm = array_merge($dadosForm, $user_id);
+        $slug = $this->model->find($id);
+        $slug = array('POST_SLUG' => $slug->POST_SLUG);
+        $dadosForm = array_merge($dadosForm, $slug);
 
         $imagem = $this->request->file('POST_IMAGE');
 
@@ -124,7 +128,7 @@ class PostsNoticiasGeralController extends StandardController {
                                     ->with('titulo', $this->titulo);
                 } else {
                     $data = date('YmdHms');
-                    $nomeArquivo = $data . " - " . $dadosForm['POST_TITULO'];
+                    $nomeArquivo = $data." - ".$dadosForm['POST_TITULO'];
                     $path = public_path('assets/public/images/fotos/');
                     $pathThumb = public_path('assets/public/images/thumbs/');
 
@@ -134,15 +138,6 @@ class PostsNoticiasGeralController extends StandardController {
                     });
                     $image->fit('1200', '630');
                     $image->save($path . "$nomeArquivo.jpg");
-
-
-
-
-
-
-
-
-
 
                     $imgThumb = $image->resize(400, null, function ($constraint) {
                         $constraint->aspectRatio();
@@ -195,12 +190,7 @@ class PostsNoticiasGeralController extends StandardController {
         if (isset($dadosForm['POST_DTINICIO']) && $dadosForm['POST_DTINICIO'] == '') {
             unset($dadosForm['POST_DTINICIO']);
         }
-
-
-
-
-
-
+        
 
         $imagem = $this->request->file('POST_IMAGE');
 
@@ -220,7 +210,7 @@ class PostsNoticiasGeralController extends StandardController {
                                     ->with('titulo', $this->titulo);
                 } else {
                     $data = date('YmdHms');
-                    $nomeArquivo = $data . " - " . $dadosForm['POST_TITULO'];
+                    $nomeArquivo = $data." - ".$dadosForm['POST_TITULO'];
                     $path = public_path('assets/public/images/fotos/');
                     $pathThumb = public_path('assets/public/images/thumbs/');
 
@@ -230,7 +220,6 @@ class PostsNoticiasGeralController extends StandardController {
                     });
                     $image->fit('1200', '630');
                     $image->save($path . "$nomeArquivo.jpg");
-
 
                     $imgThumb = $image->resize(400, null, function ($constraint) {
                         $constraint->aspectRatio();
@@ -258,23 +247,16 @@ class PostsNoticiasGeralController extends StandardController {
         $autor = $this->model->find($id);
         $user_id = array('user_id' => $autor->user_id);
         $dadosForm = array_merge($dadosForm, $user_id);
-        $slug = $this->model->find($id);
-        $slug = array('POST_SLUG' => $slug->POST_SLUG);
-        $dadosForm = array_merge($dadosForm, $slug);
-        $tags = str_slug($dadosForm['POST_TAGS'], '-');
-        $tagsURL = array('POST_TAGS_URL' => $tags);
-        $dadosForm = array_merge($dadosForm, $tagsURL);
-
-//        dd($dadosForm);
 
         $validator = validator($dadosForm, $rulesTratada);
 
-
-        if ($validator->fails()) {
-            $messages = $validator->messages();
-            return $messages;
-        }
-
+        /*
+          if( $validator->fails() ) {
+          $messages = $validator->messages();
+          return $messages;
+          }
+         * 
+         */
 
         if ($validator->fails()) {
             alert()->error('Houve um erro no registro. Corrija e tente novamente!', 'Falha na inserção!')->autoclose(4500);

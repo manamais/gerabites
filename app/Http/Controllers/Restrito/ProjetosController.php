@@ -4,24 +4,27 @@ namespace App\Http\Controllers\Restrito;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\StandardController;
-use App\Models\Restrito\EventosSociais;
+use App\Models\Restrito\Projetos;
+use App\Models\Restrito\Empresa;
 use Gate;
 
-class PostsEventoSocialController extends StandardController {
+class ProjetosController extends StandardController {
 
     protected $model;
+    protected $empresas;
     protected $request;
     protected $page;
     protected $gate;
-    protected $nomeView = 'restrito.posts-coluna-social';
-    protected $redirectIndex = '/restrito/evento-social';
+    protected $nomeView = 'restrito.projetos';
+    protected $redirectIndex = '/restrito/projetos';
 
-    public function __construct(EventosSociais $model, Request $request) {
+    public function __construct(Projetos $model, Empresa $empresas, Request $request) {
         $this->model = $model;
+        $this->empresas = $empresas;
         $this->request = $request;
-        $this->page = "coluna-social";
-        $this->titulo = "EVENTOS";
-        $this->gate = 'GERENCIAMENTO-COLUNA-SOCIAL';
+        $this->page = "projetos";
+        $this->titulo = "CONFIGURAÇÕES DOS PROJETOS";
+        $this->gate = 'SECRETARIA';
     }
 
     public function index() {
@@ -30,9 +33,9 @@ class PostsEventoSocialController extends StandardController {
             abort(403, 'Não Autorizado!');
         }
         $data = $this->model
-                ->where('ES_CODIGO','>',1)
+                ->leftJoin('empresas', 'empresas.EMPR_CODIGO', 'projetos.EMPR_CODIGO')
                 ->get();
-        return view("{$this->nomeView}.evento-index", compact('data'))
+        return view("{$this->nomeView}.index", compact('data'))
                         ->with('page', $this->page)
                         ->with('titulo', $this->titulo);
     }
@@ -42,7 +45,8 @@ class PostsEventoSocialController extends StandardController {
         if (Gate::denies("$gate")) {
             abort(403, 'Não Autorizado!');
         }
-        return view("{$this->nomeView}.evento-cadastrar-editar")
+        $empresas = $this->empresas->where('EMPR_CODIGO','<>',1)->get();
+        return view("{$this->nomeView}.cadastrar-editar", compact('empresas'))
                         ->with('page', $this->page)
                         ->with('titulo', $this->titulo);
     }
@@ -53,7 +57,8 @@ class PostsEventoSocialController extends StandardController {
             abort(403, 'Não Autorizado!');
         }
         $data = $this->model->find($id);
-        return view("{$this->nomeView}.evento-cadastrar-editar", compact('data'))
+        $empresas = $this->empresas->where('EMPR_CODIGO','<>',1)->get();
+        return view("{$this->nomeView}.cadastrar-editar", compact('data','empresas'))
                         ->with('page', $this->page)
                         ->with('titulo', $this->titulo);
     }
