@@ -81,10 +81,10 @@ class UsuariosController extends StandardController {
                                     ->with('titulo', $this->titulo);
                 } else {
                     //dd('nao encontrou falhas');
-                    $idUser = $this->model->latest()->first();
+                    $idUser = $this->model->orderBy('id','desc')->first();
                     $final = $idUser->id + 1;
                     $nomeArquivo = "USER_" . $final;
-                    $path = public_path('assets/public/images/users/');
+                    $path = public_path('assets/img/users/');
                     $image = Image::make($imagem)->fit('300', '300')->encode('jpg');
                     $image->save($path . "$nomeArquivo.jpg");
                     $imagem = array('foto' => "$nomeArquivo.jpg");
@@ -178,11 +178,12 @@ class UsuariosController extends StandardController {
                 } else {
                     //dd('nao encontrou falhas');
                     $nomeArquivo = "USER_" . $id;
-                    $path = public_path('assets/public/images/users/');
+                    $path = public_path('assets/img/users/');
                     $image = Image::make($imagem)->fit('300', '300')->encode('jpg');
                     $image->save($path . "$nomeArquivo.jpg");
                     $imagem = array('foto' => "$nomeArquivo.jpg");
                     $dadosForm = array_merge($dadosForm, $imagem);
+                    //dd($dadosForm);
                 }
             } else {
                 return redirect()->back()

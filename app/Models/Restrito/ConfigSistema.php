@@ -16,7 +16,7 @@ class ConfigSistema extends Model  implements AuditableContract
     protected $primaryKey = 'CONFIG_CODIGO';
     protected $fillable = [
         'CONFIG_NOMESITE', 'CONFIG_LOGOTOPO','CONFIG_LOGORODAPE', 'CONFIG_FAVICON', 'CONFIG_METATITLE',
-        'CONFIG_METADESCRIPTION', 'CONFIG_METAKEYWORDS','CONFIG_URLTERMODEUSO', 'CONFIG_CODGOOGLE', 'CONFIG_EJORNAL_API', 'CONFIG_EJORNAL_SENHA',
+        'CONFIG_METADESCRIPTION', 'CONFIG_METAKEYWORDS','CONFIG_URLTERMODEUSO', 'CONFIG_CODGOOGLE', 'CONFIG_API', 'CONFIG_SENHA',
         ];
     public $rules = [
         'CONFIG_NOMESITE' => 'required|max:120',
@@ -28,7 +28,7 @@ class ConfigSistema extends Model  implements AuditableContract
         'CONFIG_METAKEYWORDS' => 'required|max:255',
         'CONFIG_URLTERMODEUSO' => 'required|max:255',
         'CONFIG_CODGOOGLE' => '',
-        'CONFIG_EJORNAL_API' => 'required|max:255',
-        'CONFIG_EJORNAL_SENHA' => 'required|max:255',
+        'CONFIG_API' => 'max:255',
+        'CONFIG_SENHA' => 'max:255',
     ];
 }

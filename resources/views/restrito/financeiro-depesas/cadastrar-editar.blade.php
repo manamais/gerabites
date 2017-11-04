@@ -38,7 +38,7 @@
         </div>
         <div class='input-field col-md-6'>
             <label for='COMPLEMENTO'>COMPLEMENTO</label>
-            {!! Form::text('COMPLEMENTO', null, ['class' => 'form-control', 'style' => 'text-transform: uppercase']) !!}
+            {!! Form::text('COMPLEMENTO', null, ['class' => 'form-control']) !!}
             @if ($errors->has('COMPLEMENTO'))
             <span class='text-danger'> {{ $errors->first('COMPLEMENTO') }} </span>
             @endif

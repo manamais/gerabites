@@ -19,8 +19,6 @@ class DatabaseSeeder extends Seeder {
 
         $this->call('Categorias');
         $this->call('SubCategorias');
-        $this->call('Posicoes');
-        $this->call('PosicoesAnuncios');
         $this->call('Posts');
     }
 

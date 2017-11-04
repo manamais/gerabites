@@ -88,8 +88,8 @@ class PostsColunaSocialController extends StandardController {
                     //dd('nao encontrou falhas');
                     $final = date('YmdHms');
                     $nomeArquivo = "COLUNA-SOCIAL_$final";
-                    $path = public_path('assets/public/images/coluna-social/');
-                    $pathThumb = public_path('assets/public/images/thumbs/coluna-social/');
+                    $path = public_path('assets/img/coluna-social/');
+                    $pathThumb = public_path('assets/img/thumbs/coluna-social/');
                     $image = Image::make($imagem)->encode('jpg');
                     $imageThumb = Image::make($imagem)->encode('jpg');
                     $imageOriginal = $image->resize(770, null, function ($constraint) {
@@ -177,8 +177,8 @@ class PostsColunaSocialController extends StandardController {
                     $final = date('YmdHms');
                     $nomeArquivo = "COLUNA-SOCIAL_$final";
 
-                    $path = public_path('assets/public/images/coluna-social/');
-                    $pathThumb = public_path('assets/public/images/thumbs/coluna-social/');
+                    $path = public_path('assets/img/coluna-social/');
+                    $pathThumb = public_path('assets/img/thumbs/coluna-social/');
                     $image = Image::make($imagem)->encode('jpg');
                     $imageThumb = Image::make($imagem)->encode('jpg');
                     $imageOriginal = $image->resize(770, null, function ($constraint) {

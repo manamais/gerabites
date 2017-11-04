@@ -7926,6 +7926,8 @@ a.thumbnail.active, a.thumbnail:focus, a.thumbnail:hover {
   }
 }
 
+
+
 .input-group.material .input-group-addon {
   border: 0;
   background: none;
@@ -8599,5 +8601,20 @@ body.n-blue-grey .searchbox-icon, body.n-blue-grey .searchbox-submit {
     display: inline-block;
   }
 }
+
+.table-comment{
+    
+}
+.table-comment .tr{
+    
+}
+.table-comment .td{
+    padding: 7px;
+    
+}
+
+
+
+
 
 /*# sourceMappingURL=maps/style.css.map */

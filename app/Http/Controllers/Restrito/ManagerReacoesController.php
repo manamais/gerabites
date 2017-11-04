@@ -15,14 +15,26 @@ class ManagerReacoesController extends StandardController {
     protected $page;
     protected $gate;
     protected $nomeView = 'restrito.manager-reacao';
-    protected $redirectIndex = '/restrito/reacoes';
+    protected $redirectIndex = '/restrito/posts/reacoes';
 
     public function __construct(Reacoes $model, Request $request) {
         $this->model = $model;
         $this->request = $request;
-        $this->page = "reacoes";
+        $this->page = "posts/reacoes";
         $this->titulo = "GERENCIAMENTO DAS REAÇÕES AS POSTAGENS";
         $this->gate = 'SECRETARIA';
+    }
+    
+    public function index() {
+        
+        $gate = $this->gate;
+        if (Gate::denies("$gate")) {
+            abort(403, 'Não Autorizado!');
+        }
+        $data = $this->model->all();
+        return view("{$this->nomeView}.index", compact('data'))
+                        ->with('page', $this->page)
+                        ->with('titulo', $this->titulo);
     }
 
     public function cadastrarDB() {

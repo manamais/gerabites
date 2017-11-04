@@ -19,9 +19,10 @@
                 <thead>
                     <tr>
                         <th width='30px'>#</th>
-                        <th>PROJETO</th>
-                        <th>CLIENTE</th>
-                        <th>EQUIPE</th>
+                        <th>TAREFA</th>
+                        <th>DT. INICIO</th>
+                        <th>DT. VENCIMENTO</th>
+                        <th>PROGRESSO</th>
                         <th>STATUS</th>
                         <th width='100px'>#</th>
                     </tr>
@@ -30,9 +31,10 @@
                     @foreach($data as $registro)
                     <tr>
                         <td>{{$registro->TAR_CODIGO}}</td>
-                        <td>{{$registro->TAR_NOME}}</td>
-                        <td>{{$registro->EMPR_NOMEFANTASIA}}</td>
-                        <td>EQUIPE</td>
+                        <td>{{$registro->PROD_NOME}}</td>
+                        <td>{{$registro->TAR_DTINICIO}}</td>
+                        <td>{{$registro->TAR_DTPRAZOESTIMADO}}</td>
+                        <td>{{$registro->TAR_PROGRESSO}}</td>
                         <td>{{$registro->TAR_STATUS}}</td>
                         <td>
                             <a href='#' class='btn btn-default btn-xs white m-r-5'

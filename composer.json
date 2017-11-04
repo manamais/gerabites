@@ -6,6 +6,8 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "eduardokum/laravel-boleto": "^0.7.0",
+        "intervention/image": "^2.3",
         "laravel/framework": "5.3.*",
         "laravelcollective/html": "^5.2.0",
         "owen-it/laravel-auditing": "^4.1",

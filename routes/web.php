@@ -7,8 +7,30 @@ Route::group(['prefix' => 'restrito', 'middleware' => ['auth']], function() {
     Route::get('configuracoes', 'Restrito\ConfigController@index');
 
 
+    /* TICKETS ***************************************** */
+    Route::get('tickets', 'Restrito\TicketsController@index');
+    Route::get('tickets/cadastrar', 'Restrito\TicketsController@cadastrar');
+    Route::post('tickets/cadastrar', 'Restrito\TicketsController@cadastrarDB');
+    Route::get('tickets/editar/{id}', 'Restrito\TicketsController@editar');
+    Route::post('tickets/editar/{id}', 'Restrito\TicketsController@editarDB');
+    Route::post('tickets/deletar/{id}', 'Restrito\TicketsController@deletar');
+    /* MENSAGENS DOS TICKETS ***************************************** */
+    Route::get('tickets/{id}/view', 'Restrito\TicketsController@view');
+    Route::post('tickets/{id}/cadastrar', 'Restrito\TicketsController@cadastrarMsgDB');
+//    Route::get('tickets/{id}/deletar/{id}', 'Restrito\TicketsController@cadastrarMsgDB');
+    
+    
+    
+
+    
+    
+    
+    
+    
     /* EMPRESA ***************************************** */
     Route::get('empresas', 'Restrito\ConfigEmpresaController@index');
+    Route::get('empresas/cadastrar', 'Restrito\ConfigEmpresaController@cadastrar');
+    Route::post('empresas/cadastrar', 'Restrito\ConfigEmpresaController@cadastrarDB');
     Route::get('empresas/editar/{id}', 'Restrito\ConfigEmpresaController@editar');
     Route::post('empresas/editar/{id}', 'Restrito\ConfigEmpresaController@editarDB');
     /* DADOS DO BOLETO ***************************************** */
@@ -31,51 +53,58 @@ Route::group(['prefix' => 'restrito', 'middleware' => ['auth']], function() {
     /* GERENCIAMENTO DAS CLASSIFICAÇÕES (POSTS, ANÚNCIOS E PÁGINAS */
     Route::get('manager', 'Restrito\ManagerController@index');
     /* CATEGORIAS ***************************************** */
-    Route::get('categorias', 'Restrito\ManagerCategoriasController@index');
-    Route::get('categorias/cadastrar', 'Restrito\ManagerCategoriasController@cadastrar');
-    Route::post('categorias/cadastrar', 'Restrito\ManagerCategoriasController@cadastrarDB');
-    Route::get('categorias/editar/{id}', 'Restrito\ManagerCategoriasController@editar');
-    Route::post('categorias/editar/{id}', 'Restrito\ManagerCategoriasController@editarDB');
-    Route::post('categorias/deletar/{id}', 'Restrito\ManagerCategoriasController@deletar');
+    Route::get('posts/categorias', 'Restrito\ManagerCategoriasController@index');
+    Route::get('posts/categorias/cadastrar', 'Restrito\ManagerCategoriasController@cadastrar');
+    Route::post('posts/categorias/cadastrar', 'Restrito\ManagerCategoriasController@cadastrarDB');
+    Route::get('posts/categorias/editar/{id}', 'Restrito\ManagerCategoriasController@editar');
+    Route::post('posts/categorias/editar/{id}', 'Restrito\ManagerCategoriasController@editarDB');
+    Route::post('posts/categorias/deletar/{id}', 'Restrito\ManagerCategoriasController@deletar');
     /* SUBCATEGORIAS ***************************************** */
-    Route::get('subcategorias', 'Restrito\ManagerSubCategoriasController@index');
-    Route::get('subcategorias/cadastrar', 'Restrito\ManagerSubCategoriasController@cadastrar');
-    Route::post('subcategorias/cadastrar', 'Restrito\ManagerSubCategoriasController@cadastrarDB');
-    Route::get('subcategorias/editar/{id}', 'Restrito\ManagerSubCategoriasController@editar');
-    Route::post('subcategorias/editar/{id}', 'Restrito\ManagerSubCategoriasController@editarDB');
-    Route::post('subcategorias/deletar/{id}', 'Restrito\ManagerSubCategoriasController@deletar');
+    Route::get('posts/subcategorias', 'Restrito\ManagerSubCategoriasController@index');
+    Route::get('posts/subcategorias/cadastrar', 'Restrito\ManagerSubCategoriasController@cadastrar');
+    Route::post('posts/subcategorias/cadastrar', 'Restrito\ManagerSubCategoriasController@cadastrarDB');
+    Route::get('posts/subcategorias/editar/{id}', 'Restrito\ManagerSubCategoriasController@editar');
+    Route::post('posts/subcategorias/editar/{id}', 'Restrito\ManagerSubCategoriasController@editarDB');
+    Route::post('posts/subcategorias/deletar/{id}', 'Restrito\ManagerSubCategoriasController@deletar');
     /* POSICOES POSTS  ***************************************** */
-    Route::get('posicoes', 'Restrito\ManagerPosicoesController@index');
-    Route::get('posicoes/cadastrar', 'Restrito\ManagerPosicoesController@cadastrar');
-    Route::post('posicoes/cadastrar', 'Restrito\ManagerPosicoesController@cadastrarDB');
-    Route::get('posicoes/editar/{id}', 'Restrito\ManagerPosicoesController@editar');
-    Route::post('posicoes/editar/{id}', 'Restrito\ManagerPosicoesController@editarDB');
-    Route::post('posicoes/deletar/{id}', 'Restrito\ManagerPosicoesController@deletar');
-    /* POSICOES ANUNCIOS  ***************************************** */
-    Route::get('posicoes-anuncios', 'Restrito\ManagerPosicoesAnunciosController@index');
-    Route::get('posicoes-anuncios/cadastrar', 'Restrito\ManagerPosicoesAnunciosController@cadastrar');
-    Route::post('posicoes-anuncios/cadastrar', 'Restrito\ManagerPosicoesAnunciosController@cadastrarDB');
-    Route::get('posicoes-anuncios/editar/{id}', 'Restrito\ManagerPosicoesAnunciosController@editar');
-    Route::post('posicoes-anuncios/editar/{id}', 'Restrito\ManagerPosicoesAnunciosController@editarDB');
-    Route::post('posicoes-anuncios/deletar/{id}', 'Restrito\ManagerPosicoesAnunciosController@deletar');
+    Route::get('posts/posicoes', 'Restrito\ManagerPosicoesController@index');
+    Route::get('posts/posicoes/cadastrar', 'Restrito\ManagerPosicoesController@cadastrar');
+    Route::post('posts/posicoes/cadastrar', 'Restrito\ManagerPosicoesController@cadastrarDB');
+    Route::get('posts/posicoes/editar/{id}', 'Restrito\ManagerPosicoesController@editar');
+    Route::post('posts/posicoes/editar/{id}', 'Restrito\ManagerPosicoesController@editarDB');
+    Route::post('posts/posicoes/deletar/{id}', 'Restrito\ManagerPosicoesController@deletar');
     /* PAGINAS  ***************************************** */
-    Route::get('paginas', 'Restrito\ManagerPaginasController@index');
-    Route::get('paginas/cadastrar', 'Restrito\ManagerPaginasController@cadastrar');
-    Route::post('paginas/cadastrar', 'Restrito\ManagerPaginasController@cadastrarDB');
-    Route::get('paginas/editar/{id}', 'Restrito\ManagerPaginasController@editar');
-    Route::post('paginas/editar/{id}', 'Restrito\ManagerPaginasController@editarDB');
-    Route::post('paginas/deletar/{id}', 'Restrito\ManagerPaginasController@deletar');
+    Route::get('posts/paginas', 'Restrito\ManagerPaginasController@index');
+    Route::get('posts/paginas/cadastrar', 'Restrito\ManagerPaginasController@cadastrar');
+    Route::post('posts/paginas/cadastrar', 'Restrito\ManagerPaginasController@cadastrarDB');
+    Route::get('posts/paginas/editar/{id}', 'Restrito\ManagerPaginasController@editar');
+    Route::post('posts/paginas/editar/{id}', 'Restrito\ManagerPaginasController@editarDB');
+    Route::post('posts/paginas/deletar/{id}', 'Restrito\ManagerPaginasController@deletar');
 
     /* REAÇÕES  ***************************************** */
-    Route::get('reacoes', 'Restrito\ManagerReacoesController@index');
-    Route::get('reacoes/cadastrar', 'Restrito\ManagerReacoesController@cadastrar');
-    Route::post('reacoes/cadastrar', 'Restrito\ManagerReacoesController@cadastrarDB');
-    Route::get('reacoes/editar/{id}', 'Restrito\ManagerReacoesController@editar');
-    Route::post('reacoes/editar/{id}', 'Restrito\ManagerReacoesController@editarDB');
-    Route::post('reacoes/deletar/{id}', 'Restrito\ManagerReacoesController@deletar');
+    Route::get('posts/reacoes', 'Restrito\ManagerReacoesController@index');
+    Route::get('posts/reacoes/cadastrar', 'Restrito\ManagerReacoesController@cadastrar');
+    Route::post('posts/reacoes/cadastrar', 'Restrito\ManagerReacoesController@cadastrarDB');
+    Route::get('posts/reacoes/editar/{id}', 'Restrito\ManagerReacoesController@editar');
+    Route::post('posts/reacoes/editar/{id}', 'Restrito\ManagerReacoesController@editarDB');
+    Route::post('posts/reacoes/deletar/{id}', 'Restrito\ManagerReacoesController@deletar');
 
 
-
+    /* DEPOIMENTOS DOS USUÁRIOS QUANTOS AOS SERVIÇOS DA EMPRESA *************************** */
+    Route::get('depoimentos', 'Restrito\DepoimentosUsersController@index');
+    Route::get('depoimentos/cadastrar', 'Restrito\DepoimentosUsersController@cadastrar');
+    Route::post('depoimentos/cadastrar', 'Restrito\DepoimentosUsersController@cadastrarDB');
+    Route::get('depoimentos/editar/{id}', 'Restrito\DepoimentosUsersController@editar');
+    Route::post('depoimentos/editar/{id}', 'Restrito\DepoimentosUsersController@editarDB');
+    Route::post('depoimentos/deletar/{id}', 'Restrito\DepoimentosUsersController@deletar');
+    /* MUDANÇA STATUS DOS DEPOIMENTOS *************************** */
+    Route::get('depoimentos-adm', 'Restrito\DepoimentosAdmController@index');
+    Route::get('depoimentos-adm/editar/{id}', 'Restrito\DepoimentosAdmController@editar');
+    Route::post('depoimentos-adm/editar/{id}', 'Restrito\DepoimentosAdmController@editarDB');
+    Route::post('depoimentos-adm/deletar/{id}', 'Restrito\DepoimentosAdmController@deletar');
+    
+    
+    
 
     /* GESTÃO DE USUÁRIOS, PAPÉIS E PERMISSÕES NO SISTEMA *************************** */
     Route::get('usuarios', 'Restrito\UsuariosController@index');
@@ -84,6 +113,7 @@ Route::group(['prefix' => 'restrito', 'middleware' => ['auth']], function() {
     Route::get('usuarios/editar/{id}', 'Restrito\UsuariosController@editar');
     Route::post('usuarios/editar/{id}', 'Restrito\UsuariosController@editarDB');
     Route::post('usuarios/deletar/{id}', 'Restrito\UsuariosController@deletar');
+
     /* GESTÃO DE USUÁRIOS (PERMISSÕES)  - SOMENTE ADMIN ************************************* */
     Route::get('permissoes', 'Restrito\UsuariosPermissionsController@index');
     Route::get('permissoes/cadastrar', 'Restrito\UsuariosPermissionsController@cadastrar');
@@ -118,22 +148,21 @@ Route::group(['prefix' => 'restrito', 'middleware' => ['auth']], function() {
 
 
 
-    /* POSTS   ***************************************** */
-    Route::get('posts', 'Restrito\PostsController@index');
+
     /* CONTROLE DE NOTÍCIAS DO AUTOR ******************************** */
-    Route::get('noticias', 'Restrito\PostsNoticiasController@index');
-    Route::get('noticias/cadastrar', 'Restrito\PostsNoticiasController@cadastrar');
-    Route::post('noticias/cadastrar', 'Restrito\PostsNoticiasController@cadastrarDB');
-    Route::get('noticias/editar/{id}', 'Restrito\PostsNoticiasController@editar');
-    Route::post('noticias/editar/{id}', 'Restrito\PostsNoticiasController@editarDB');
-    Route::post('noticias/deletar/{id}', 'Restrito\PostsNoticiasController@deletar');
+    Route::get('posts/artigos', 'Restrito\PostsArtigosController@index');
+    Route::get('posts/artigos/cadastrar', 'Restrito\PostsArtigosController@cadastrar');
+    Route::post('posts/artigos/cadastrar', 'Restrito\PostsArtigosController@cadastrarDB');
+    Route::get('posts/artigos/editar/{id}', 'Restrito\PostsArtigosController@editar');
+    Route::post('posts/artigos/editar/{id}', 'Restrito\PostsArtigosController@editarDB');
+    Route::post('posts/artigos/deletar/{id}', 'Restrito\PostsArtigosController@deletar');
     /* BANNERS ***************************************** */
-    Route::get('banners', 'Restrito\PostsBannersController@index');
-    Route::get('banners/cadastrar', 'Restrito\PostsBannersController@cadastrar');
-    Route::post('banners/cadastrar', 'Restrito\PostsBannersController@cadastrarDB');
-    Route::get('banners/editar/{id}', 'Restrito\PostsBannersController@editar');
-    Route::post('banners/editar/{id}', 'Restrito\PostsBannersController@editarDB');
-    Route::post('banners/deletar/{id}', 'Restrito\PostsBannersController@deletar');
+    Route::get('posts/banners', 'Restrito\PostsBannersController@index');
+    Route::get('posts/banners/cadastrar', 'Restrito\PostsBannersController@cadastrar');
+    Route::post('posts/banners/cadastrar', 'Restrito\PostsBannersController@cadastrarDB');
+    Route::get('posts/banners/editar/{id}', 'Restrito\PostsBannersController@editar');
+    Route::post('posts/banners/editar/{id}', 'Restrito\PostsBannersController@editarDB');
+    Route::post('posts/banners/deletar/{id}', 'Restrito\PostsBannersController@deletar');
     /* VIDEOS   ***************************************** */
     Route::get('videos', 'Restrito\PostsVideosController@index');
     Route::get('videos/cadastrar', 'Restrito\PostsVideosController@cadastrar');
@@ -181,31 +210,40 @@ Route::group(['prefix' => 'restrito', 'middleware' => ['auth']], function() {
 
 
 
-    /* DÉBITOS ***************************************** */
+    /* PROJETOS ***************************************** */
     Route::get('projetos', 'Restrito\ProjetosController@index');
     Route::get('projetos/cadastrar', 'Restrito\ProjetosController@cadastrar');
     Route::post('projetos/cadastrar', 'Restrito\ProjetosController@cadastrarDB');
     Route::get('projetos/editar/{id}', 'Restrito\ProjetosController@editar');
     Route::post('projetos/editar/{id}', 'Restrito\ProjetosController@editarDB');
     Route::post('projetos/deletar/{id}', 'Restrito\ProjetosController@deletar');
-    /* DÉBITOS ***************************************** */
+    Route::get('projetos/view/{id}', 'Restrito\ProjetosController@view');
+    /* ETAPAS E FASE DO PROJETO ***************************************** */
     Route::get('projetos/etapas', 'Restrito\ProjetosEtapasController@index');
     Route::get('projetos/etapas/cadastrar', 'Restrito\ProjetosEtapasController@cadastrar');
     Route::post('projetos/etapas/cadastrar', 'Restrito\ProjetosEtapasController@cadastrarDB');
     Route::get('projetos/etapas/editar/{id}', 'Restrito\ProjetosEtapasController@editar');
     Route::post('projetos/etapas/editar/{id}', 'Restrito\ProjetosEtapasController@editarDB');
     Route::post('projetos/etapas/deletar/{id}', 'Restrito\ProjetosEtapasController@deletar');
-    /* DÉBITOS ***************************************** */
-    Route::get('projetos/{cod}/tarefas', 'Restrito\ProjetosTarefasController@tarefas');
-    Route::get('projetos/{cod}/tarefas/cadastrar', 'Restrito\ProjetosTarefasController@cadastrarTarefa');
-    Route::post('projetos/{cod}/tarefas/cadastrar', 'Restrito\ProjetosTarefasController@cadastrarTarefaDB');
-    Route::get('projetos/{cod}/tarefas/editar/{id}', 'Restrito\ProjetosTarefasController@editarTarefa');
-    Route::post('projetos/{cod}/tarefas/editar/{id}', 'Restrito\ProjetosTarefasController@editarTarefaDB');
-    Route::post('projetos/{cod}/tarefas/deletar/{id}', 'Restrito\ProjetosTarefasController@deletar');
-
-
-
-
+    /* TAREFAS ***************************************** */
+    Route::get('projetos/{cod}/tarefas/cadastrar', 'Restrito\ProjetosController@cadastrarTarefa');
+    Route::post('projetos/{cod}/tarefas/cadastrar', 'Restrito\ProjetosController@cadastrarTarefaDB');
+    Route::get('projetos/{cod}/tarefas/editar/{id}', 'Restrito\ProjetosController@editarTarefa');
+    Route::post('projetos/{cod}/tarefas/editar/{id}', 'Restrito\ProjetosController@editarTarefaDB');
+    Route::post('projetos/{cod}/tarefas/deletar/{id}', 'Restrito\ProjetosController@deletarTarefa');
+    /* COMENTÁRIOS ***************************************** */
+    Route::get('projetos/{cod}/comentarios/cadastrar', 'Restrito\ProjetosController@cadastrarComentarios');
+    Route::post('projetos/{cod}/comentarios/cadastrar', 'Restrito\ProjetosController@cadastrarComentariosDB');
+    Route::get('projetos/{cod}/comentarios/editar/{id}', 'Restrito\ProjetosController@editarComentarios');
+    Route::post('projetos/{cod}/comentarios/editar/{id}', 'Restrito\ProjetosController@editarComentariosDB');
+    Route::post('projetos/{cod}/comentarios/deletar/{id}', 'Restrito\ProjetosController@deletarComentarios');
+    /* BUGS ***************************************** */
+    Route::get('projetos/{cod}/bugs/cadastrar', 'Restrito\ProjetosController@cadastrarBugs');
+    Route::post('projetos/{cod}/bugs/cadastrar', 'Restrito\ProjetosController@cadastrarBugsDB');
+    Route::get('projetos/{cod}/bugs/editar/{id}', 'Restrito\ProjetosController@editarBugs');
+    Route::post('projetos/{cod}/bugs/editar/{id}', 'Restrito\ProjetosController@editarBugsDB');
+    Route::post('projetos/{cod}/bugs/deletar/{id}', 'Restrito\ProjetosController@deletarBugs');
+ 
 
 
 

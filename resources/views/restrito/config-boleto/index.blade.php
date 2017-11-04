@@ -1,21 +1,22 @@
 @extends('layouts.restrito')
 @section('content')
-<ol class='breadcrumb'>
+
+<ol class="breadcrumb breadcrumb-arrow text-uppercase">
     <li><a href='{{url('/restrito')}}'>Home</a></li>
-    <li><a href='{{url('/restrito/empresa')}}'>Configurações</a></li>
+    <li><a href='{{url('/restrito/categorias')}}'>Classificação</a></li>
     <li class='active'>{{$titulo}}</li>
 </ol>
 
 <h3 class="section-title first-title">
     {{$titulo}}
+    <a href='{{url("/restrito/$page/cadastrar")}}' class='btn btn-sm btn-primary pull-right white'>Novo Registro</a>
 </h3>
-<div class='row m-t-30'>
-    <div class='widget widget-green'>
-        <div class='widget-content'>
-            <div class='table-responsive'>
-                <table class='table table-hover'>
 
-
+<div class="row">
+    <div class="col-lg-12">
+        <div class='content-box'>
+            <div class='content'>
+                <table class="table display">
                     @foreach($data as $registro)
                     @if($registro->CB_BANCO == 'BANCO DO BRASIL')
                     @php $class = 'text-warning' @endphp
@@ -45,31 +46,34 @@
                         </tr>
                         <tr>
                             <th colspan='3'>MENSAGEM #1</th>
-                            <th colspan='3'>MENSAGEM #2</th>
-                            <th colspan='3'>MENSAGEM #3</th>
+                            <th colspan='2'>MENSAGEM #2</th>
+                            <th colspan='2'>MENSAGEM #3</th>
                         </tr>
                         <tr>
                             <td colspan='3'>{{ $registro->CB_MENSAGEM1 }}</td>
-                            <td colspan='3'>{{ $registro->CB_MENSAGEM2 }}</td>
-                            <td colspan='3'>{{ $registro->CB_MENSAGEM3 }}</td>
+                            <td colspan='2'>{{ $registro->CB_MENSAGEM2 }}</td>
+                            <td colspan='2'>{{ $registro->CB_MENSAGEM3 }}</td>
                         </tr>
                         <tr>
                             <th colspan='3'>INSTRUÇÃO #1</th>
-                            <th colspan='3'>INSTRUÇÃO #2</th>
-                            <th colspan='3'>INSTRUÇÃO #3</th>
+                            <th colspan='2'>INSTRUÇÃO #2</th>
+                            <th colspan='2'>INSTRUÇÃO #3</th>
                         </tr>
                         <tr>
                             <td colspan='3'>{{ $registro->CB_INSTRUCAO1 }}</td>
-                            <td colspan='3'>{{ $registro->CB_INSTRUCAO2 }}</td>
-                            <td colspan='3'>{{ $registro->CB_INSTRUCAO3 }}</td>
+                            <td colspan='2'>{{ $registro->CB_INSTRUCAO2 }}</td>
+                            <td colspan='2'>{{ $registro->CB_INSTRUCAO3 }}</td>
                         </tr>
 
                         <tr>
-                            <td colspan='20'>
-                                <a href='{{url("/restrito/$page/editar/$registro->CB_CODIGO")}}' class='label label-success m-r-5'>
+                            <td colspan='7'>
+                                <a href='{{url("/restrito/$page/editar/$registro->CB_CODIGO")}}' 
+                                   class='btn btn-primary btn-xs white m-r-5'>
                                     <i class='fa fa-pencil'></i> Edit
                                 </a>
-                                <a href='{{url("/restrito/$page/view-modelo")}}' target='_blank' class='label label-info m-l-5'>
+
+                                <a href='{{url("/restrito/$page/view-modelo")}}' 
+                                   target='_blank' class='btn btn-default btn-xs white'>
                                     Visualizar Modelo
                                 </a>
                             </td>
@@ -77,8 +81,11 @@
                     </tbody>
                     @endforeach
 
+
                 </table>
             </div>
+
+
         </div>
     </div>
 </div>
@@ -87,6 +94,7 @@
 @endpush
 
 @push('js-topo')
+
 @endpush
 
 @push('js-footer')

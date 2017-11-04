@@ -15,7 +15,7 @@ class Empresa extends Model  implements AuditableContract
     protected $table = 'empresas';
     protected $primaryKey = 'EMPR_CODIGO';
     protected $fillable = [
-        'EMPR_NOMEFANTASIA', 'EMPR_RAZAOSOCIAL', 'EMPR_INSCRICAOMUNICIPAL', 'EMPR_INSCRICAOESTADUAL', 'EMPR_CNPJ', 'EMPR_ENDERECO', 'EMPR_CIDADE', 'EMPR_UF', 'EMPR_CEP', 'EMPR_FONE','EMPR_LOGO',
+        'EMPR_NOMEFANTASIA', 'EMPR_RAZAOSOCIAL', 'EMPR_INSCRICAOMUNICIPAL', 'EMPR_INSCRICAOESTADUAL', 'EMPR_CNPJ', 'EMPR_ENDERECO', 'EMPR_CIDADE', 'EMPR_UF', 'EMPR_CEP', 'EMPR_FONE1','EMPR_FONE2','EMPR_LOGO',
     ];
     public $rules = [
         'EMPR_NOMEFANTASIA' => 'required|max:200',
@@ -27,7 +27,8 @@ class Empresa extends Model  implements AuditableContract
         'EMPR_CIDADE' => 'required|max:120',
         'EMPR_UF' => 'required|max:2',
         'EMPR_CEP' => 'required|max:10',
-        'EMPR_FONE' => 'required|max:14',
+        'EMPR_FONE1' => 'required|max:15',
+        'EMPR_FONE2' => 'max:15',
         'EMPR_LOGO' => 'max:50',
     ];
 

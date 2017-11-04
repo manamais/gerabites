@@ -10,6 +10,9 @@ class CreateMensagensTicketsTable extends Migration {
         Schema::create('mensagens_tickets', function (Blueprint $table) {
             $table->increments('MT_CODIGO');
 
+            $table->integer('user_id')->nullable()->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
+
             $table->integer('TICK_CODIGO')->unsigned();
             $table->foreign('TICK_CODIGO')->references('TICK_CODIGO')->on('tickets')->onDelete('cascade');
             $table->text('TICK_MENSAGEM');

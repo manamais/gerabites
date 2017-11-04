@@ -9,7 +9,9 @@
 
 <h3 class="section-title first-title">
     {{$titulo}}
+    @can('TAREFAS')
     <a href='{{url("/restrito/$page/cadastrar")}}' class='btn btn-sm btn-primary pull-right white'>Novo Registro</a>
+    @endcan
 </h3>
 
 <div class="row">
@@ -23,7 +25,7 @@
                         <th>CLIENTE</th>
                         <th>EQUIPE</th>
                         <th>STATUS</th>
-                        <th width='100px'>#</th>
+                        <th width='180px'>#</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,7 +36,11 @@
                         <td>{{$registro->EMPR_NOMEFANTASIA}}</td>
                         <td>EQUIPE</td>
                         <td>{{$registro->PROJ_STATUS}}</td>
-                        <td>
+                        <td class='pull-right'>
+                            <a href='{{url("/restrito/$page/view/$registro->PROJ_CODIGO")}}' class='btn btn-primary btn-xs white m-r-5'>
+                                <i class='zmdi zmdi-eye'></i> View
+                            </a>
+                            @can('TAREFAS')
                             <a href='#' class='btn btn-default btn-xs white m-r-5'
                                onclick="deletar('{{url("/restrito/$page/deletar/$registro->PROJ_CODIGO")}}')" id='urlDeletar' >
                                 <i class='zmdi zmdi-delete'></i> Del
@@ -42,6 +48,7 @@
                             <a href='{{url("/restrito/$page/editar/$registro->PROJ_CODIGO")}}' class='btn btn-primary btn-xs white'>
                                 <i class='zmdi zmdi-edit'></i> Edit
                             </a>
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

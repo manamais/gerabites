@@ -13,8 +13,10 @@ class CreateBugsTable extends Migration {
             $table->integer('PROJ_CODIGO')->unsigned();
             $table->foreign('PROJ_CODIGO')->references('PROJ_CODIGO')->on('projetos')->onDelete('cascade');
 
+            $table->integer('user_id')->nullable()->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
+
             $table->string('BUGS_NOME', 60);
-            $table->string('BUGS_PRIORIDADE', 20);
             $table->string('BUGS_GRAVIDADE', 20);
             $table->text('BUGS_DESCRICAO');
             $table->string('BUGS_STATUS', 20);

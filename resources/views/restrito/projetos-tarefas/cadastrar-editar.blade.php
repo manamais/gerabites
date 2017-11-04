@@ -11,9 +11,8 @@
 
 <div class="content-box">
     <div class="content">
-
         @if(isset($data->TAR_CODIGO))
-        {!! Form::model($data, ['url' => "/restrito/$page/editar/$data->TAR_CODIGO", 'method' => 'POST',
+        {!! Form::model($data, ['url' => "/restrito/projetos/$codProjeto/tarefas/editar/$data->TAR_CODIGO", 'method' => 'POST',
         'class' => 'form-horizontal', 'enctype'=>'multipart/form-data']) !!}
         @else
         {!! Form::open(['url' => "/restrito/$page/cadastrar", 'method' => 'POST', 'class' => 'form-horizontal',
@@ -21,7 +20,6 @@
         @endif
 
         <div class='row'>
-
             <div class='input-field col-md-3'>
                 <label>ETAPA/FASE</label>
                 <select name='ETA_CODIGO' class="form-control" required>
@@ -30,12 +28,12 @@
                         @if(isset($data->ETA_CODIGO) && ($data->ETA_CODIGO==$etapa->ETA_CODIGO)) @php echo 'selected'; @endphp @endif
                         value="{{$etapa->ETA_CODIGO}}" >
                         {{$etapa->ETA_NOME}}
-                </option>
-                @endforeach
-            </select>
-            @if ($errors->has('PROD_CODIGO'))
-            <span class='text-danger'> {{ $errors->first('PROD_CODIGO') }} </span>
-            @endif
+                    </option>
+                    @endforeach
+                </select>
+                @if ($errors->has('PROD_CODIGO'))
+                <span class='text-danger'> {{ $errors->first('PROD_CODIGO') }} </span>
+                @endif
         </div>
         <div class='input-field col-md-5'>
             <label>TAREFA/PRODUTO</label>
@@ -77,44 +75,32 @@
         <span class='text-danger'> {{ $errors->first('TAR_DESCRICAO') }} </span>
         @endif
     </div>
-    <div class='input-field col-md-3'>
-        <label>DT. INICIO</label>
-        {!! Form::date('TAR_DTINICIO', null, ['required' => 'yes', 'class' => 'form-control']) !!}
-        <!--{!! Form::input('text', 'TAR_DTINICIO', \Carbon\Carbon::create()->format('d/m/Y H:i:s'), ['class'=>'form-control']) !!}-->
+    <div class='col-md-3'>
+        <label>DT. INÍCIO</label>
+        <input name="TAR_DTINICIO" type="datetime-local" class="form-control"
+               value="{{$data->TAR_DTINICIO or old('TAR_DTINICIO')}}"/>
         @if ($errors->has('TAR_DTINICIO'))
         <span class='text-danger'> {{ $errors->first('TAR_DTINICIO') }} </span>
         @endif
     </div>
-    
-           <!--Form::datetime('visivel_Ini', \Carbon\Carbon::now(), ['class'=>'form-control'])-->
-    
-    
-    
+
 </div>
 <div class='row m-t-20'>
     <div class='col-md-3'>
         <label>(ESTIMATIVA)</label>
-        <div class='input-group date'>
-            <span class='input-group-addon'>
-                <span class='zmdi zmdi-calendar'></span>
-            </span>
-            {!! Form::text('TAR_DTPRAZOESTIMADO', null, ['required' => 'yes', 'class' => 'form-control data-select', 'placeholder'=>date("d-m-Y")]) !!}
-            @if ($errors->has('TAR_DTPRAZOESTIMADO'))
-            <span class='text-danger'> {{ $errors->first('TAR_DTPRAZOESTIMADO') }} </span>
-            @endif
-        </div>
+        <input name="TAR_DTPRAZOESTIMADO" type="datetime-local" class="form-control"
+               value="{{$data->TAR_DTPRAZOESTIMADO or old('TAR_DTPRAZOESTIMADO')}}"/>
+        @if ($errors->has('TAR_DTPRAZOESTIMADO'))
+        <span class='text-danger'> {{ $errors->first('TAR_DTPRAZOESTIMADO') }} </span>
+        @endif
     </div>
     <div class='col-md-3'>
         <label>ENCERRAMENTO</label>
-        <div class='input-group date'>
-            <span class='input-group-addon'>
-                <span class='zmdi zmdi-calendar'></span>
-            </span>
-            {!! Form::text('TAR_DTFINAL', null, ['class' => 'form-control data-select', 'placeholder'=>date("d-m-Y")]) !!}
-            @if ($errors->has('TAR_DTFINAL'))
-            <span class='text-danger'> {{ $errors->first('TAR_DTFINAL') }} </span>
-            @endif
-        </div>
+        <input name="TAR_DTFINAL" type="datetime-local" class="form-control"
+               value="{{$data->TAR_DTFINAL or old('TAR_DTFINAL')}}"/>
+        @if ($errors->has('TAR_DTFINAL'))
+        <span class='text-danger'> {{ $errors->first('TAR_DTFINAL') }} </span>
+        @endif
     </div>
     <div class='input-field col-md-6'>
         <label>ARQUIVO (.jpg .png .gif .pdf)</label>
@@ -198,6 +184,8 @@
 
 
 @push('css')
+<link rel='stylesheet' href='{{url('assets/restrito/bower_components/bootstrap-select/dist/css/bootstrap-select.css')}}'/>
+<link rel='stylesheet' href='{{url('assets/restrito/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css')}}'/>
 @endpush
 
 @push('js-topo')
@@ -205,7 +193,29 @@
 
 @push('js-footer')
 
+<script src="{{url('assets/restrito/js/input-mask.min.js')}}"></script>
+<script src="{{url('assets/restrito/bower_components/bootstrap-select/dist/js/bootstrap-select.js')}}"></script>
+<script src="{{url('assets/restrito/bower_components/moment/min/moment.min.js')}}"></script>
+<script src="{{url('assets/restrito/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
+<script src="{{url('assets/restrito/js/farbtastic.js')}}"></script>
 
+<script>
+$(".data-select").datetimepicker({
+    icons: {
+        time: "zmdi zmdi-time",
+        date: 'zmdi zmdi-calendar',
+        up: "zmdi zmdi-chevron-up",
+        down: "zmdi zmdi-chevron-down",
+        previous: "zmdi zmdi-chevron-left",
+        next: "zmdi zmdi-chevron-right"
+    },
+    defaultDate: "<?php date('d-m-Y') ?>",
+    disabledDates: [
+        moment("<?php date('d-m-Y') ?>"),
+        moment("<?php date('d-m-Y') ?>")
+    ]
+});
+</script>
 @endpush
 
 @endsection

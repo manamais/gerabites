@@ -16,13 +16,13 @@ class ManagerSubCategoriasController extends StandardController {
     protected $page;
     protected $gate;
     protected $nomeView = 'restrito.manager-subcategoria';
-    protected $redirectIndex = '/restrito/subcategorias';
+    protected $redirectIndex = '/restrito/posts/subcategorias';
 
     public function __construct(SubCategorias $model, Categorias $categorias, Request $request) {
         $this->model = $model;
         $this->categorias = $categorias;
         $this->request = $request;
-        $this->page = "subcategorias";
+        $this->page = "posts/subcategorias";
         $this->titulo = "GERENCIAMENTO DAS SUBCATEGORIAS";
         $this->gate = 'SECRETARIA';
     }

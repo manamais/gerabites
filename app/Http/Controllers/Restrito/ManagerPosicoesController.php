@@ -35,7 +35,7 @@ class ManagerPosicoesController extends StandardController {
         $foto = $this->request->file('POS_IMAGEM');
         $final = date('YmdHms');
         $nomeArquivo = "POS_NOTICIA_$final";
-        $path = public_path('assets/restrict/images/layouts/');
+        $path = public_path('assets/img/layouts/');
         $uploadImage = Image::make($foto)->encode('png')->save($path . "$nomeArquivo.png");
 
         $imagem = array('POS_IMAGEM' => "$nomeArquivo.png");
@@ -74,7 +74,7 @@ class ManagerPosicoesController extends StandardController {
         if ($foto != null) {
             $final = date('YmdHms');
             $nomeArquivo = "POS_NOTICIA_$final";
-            $path = public_path('assets/restrict/images/layouts/');
+            $path = public_path('assets/img/layouts/');
             $uploadImage = Image::make($foto)->encode('png')->save($path . "$nomeArquivo.png");
 
             $imagem = array('POS_IMAGEM' => "$nomeArquivo.png");

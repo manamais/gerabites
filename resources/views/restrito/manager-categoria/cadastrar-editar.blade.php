@@ -1,58 +1,60 @@
 @extends('layouts.restrito')
 @section('content')
-<ol class='breadcrumb'>
+<ol class='breadcrumb text-uppercase'>
     <li><a href='{{url('/restrito')}}'>Home</a></li>
-    <li><a href='{{url('/restrito/categorias')}}'>Classificação</a></li>
+    <li><a href='{{url('/restrito/despesas')}}'>despesas</a></li>
     <li><a href='{{url("/restrito/$page")}}'>{{$titulo}}</a></li>
     <li class='active'>Gerencimento</li>
 </ol>
 
 <h3 class="section-title first-title">{{$titulo}}</h3>
-<div class='row m-t-30'>
-    <div class='widget widget-green'>
-        <div class='widget-content'>
-            @if(isset($data->CAT_CODIGO))
-            {!! Form::model($data, ['url' => "/restrito/$page/editar/$data->CAT_CODIGO", 'method' => 'POST',
-            'class' => 'form-horizontal', 'enctype'=>'multipart/form-data']) !!}
-            @else
-            {!! Form::open(['url' => "/restrito/$page/cadastrar", 'method' => 'POST', 'class' => 'form-horizontal',
-            'enctype'=>'multipart/form-data', 'form-send'=> "restrito/$page/cadastrar" ]) !!}
-            @endif
 
-            <div class='row'>
-                <div class='input-field col-md-3'>
-                    <label>*CATEGORIA</label>
-                    {{ Form::select('CAT_TIPO', [
+<div class="content-box">
+    <div class="content">
+
+        @if(isset($data->CAT_CODIGO))
+        {!! Form::model($data, ['url' => "/restrito/$page/editar/$data->CAT_CODIGO", 'method' => 'POST',
+        'class' => 'form-horizontal', 'enctype'=>'multipart/form-data']) !!}
+        @else
+        {!! Form::open(['url' => "/restrito/$page/cadastrar", 'method' => 'POST', 'class' => 'form-horizontal',
+        'enctype'=>'multipart/form-data', 'form-send'=> "restrito/$page/cadastrar" ]) !!}
+        @endif
+
+        <div class='row'>
+            <div class='input-field col-md-3'>
+                <label>*CATEGORIA</label>
+                {{ Form::select('CAT_TIPO', [
                                 'E' => 'EDITORIA',
                                 'B' => 'BLOGS',
                                 'C' => 'COLUNAS',
+                                'P' => 'PÁGINAS',
                             ], null, ['class' => 'form-control', 'required' => 'yes'])
-                    }}
-                    @if ($errors->has('LAY_STATUS'))
-                    <span class='text-danger'> {{ $errors->first('LAY_STATUS') }} </span>
-                    @endif
-                </div>
-
-                <div class='input-field col-md-3'>
-                    <label>*NOME</label>
-                    {!! Form::text('CAT_TITULO', null, ['required' => 'yes', 'min' => '5', 'maxlength' => '50', 'class' => 'form-control']) !!}
-                    @if ($errors->has('CAT_TITULO'))
-                    <span class='text-danger'> {{ $errors->first('CAT_TITULO') }} </span>
-                    @endif
-                </div>
-
-                <div class='input-field col-md-6'>
-                    <label>*DESCRIÇÃO</label>
-                    {!! Form::text('CAT_DESCRICAO', null, ['required' => 'yes', 'min' => '5', 'class' => 'form-control' ]) !!}
-                    @if ($errors->has('CAT_DESCRICAO'))
-                    <span class='text-danger'> {{ $errors->first('CAT_DESCRICAO') }} </span>
-                    @endif
-                </div>
+                }}
+                @if ($errors->has('LAY_STATUS'))
+                <span class='text-danger'> {{ $errors->first('LAY_STATUS') }} </span>
+                @endif
             </div>
-            <div class='row manager'>
-                <div class='input-field col-md-3'>
-                    <label for='CAT_ICONE'>ÍCONE</label>
-                    {{ Form::select('CAT_ICONE', [
+
+            <div class='input-field col-md-3'>
+                <label>*NOME</label>
+                {!! Form::text('CAT_TITULO', null, ['required' => 'yes', 'min' => '5', 'maxlength' => '50', 'class' => 'form-control']) !!}
+                @if ($errors->has('CAT_TITULO'))
+                <span class='text-danger'> {{ $errors->first('CAT_TITULO') }} </span>
+                @endif
+            </div>
+
+            <div class='input-field col-md-6'>
+                <label>*DESCRIÇÃO</label>
+                {!! Form::text('CAT_DESCRICAO', null, ['required' => 'yes', 'min' => '5', 'class' => 'form-control' ]) !!}
+                @if ($errors->has('CAT_DESCRICAO'))
+                <span class='text-danger'> {{ $errors->first('CAT_DESCRICAO') }} </span>
+                @endif
+            </div>
+        </div>
+        <div class='row m-t-20'>
+            <div class='input-field col-md-3'>
+                <label for='CAT_ICONE'>ÍCONE</label>
+                {{ Form::select('CAT_ICONE', [
                                 ''=>'',
                                 'fa-500px'=>'fa-500px	[&#xf26e;]',
                                 'fa-address-book'=>'fa-address-book	[&#xf2b9;]',
@@ -841,75 +843,69 @@
                                 'fa-youtube-play'=>'fa-youtube-play	[&#xf16a;]',
 
                                 ], null, ['class' => 'form-control'])
-                    }}
-                    @if ($errors->has('CAT_ICONE'))
-                    <span class='text-danger'> {{ $errors->first('CAT_ICONE') }} </span>
-                    @endif
-
-                </div>
-
-                <div class='input-field col-md-3'>
-                    <label>COR DO TOPO</label>
-                    {!! Form::text('CAT_CORTOPO', null, ['class' => 'jscolor form-control']) !!}
-                    @if ($errors->has('CAT_CORTOPO'))
-                    <span class='text-danger'> {{ $errors->first('CAT_CORTOPO') }} </span>
-                    @endif
-                </div>
-                <div class='input-field col-md-2'>
-                    <label>FONTE (TOPO)</label>
-                    {!! Form::text('CAT_CORFONTETOPO', null, ['class' => 'jscolor form-control']) !!}
-                    @if ($errors->has('CAT_CORFONTETOPO'))
-                    <span class='text-danger'> {{ $errors->first('CAT_CORFONTETOPO') }} </span>
-                    @endif
-                </div>
-
-                <div class='col-md-2'>
-                    <label>*LINK NO TOPO?</label>
-                    {{ Form::select('CAT_LINKTOPO', [
-                                'S' => 'SIM',
-                                'N' => 'NÃO',
-                            ], null, ['class' => 'form-control', 'required' => 'yes'])
-                    }}
-                    @if ($errors->has('CAT_LINKTOPO'))
-                    <span class='color-danger'> {{ $errors->first('CAT_LINKTOPO') }} </span>
-                    @endif
-                </div>
-                <div class='col-md-2'>
-                    <label>*LINK NO RODAPÉ?</label>
-                    {{ Form::select('CAT_LINKFOOTER', [
-                                'S' => 'SIM',
-                                'N' => 'NÃO',
-                            ], null, ['class' => 'form-control', 'required' => 'yes'])
-                    }}
-                    @if ($errors->has('CAT_LINKFOOTER'))
-                    <span class='color-danger'> {{ $errors->first('CAT_LINKFOOTER') }} </span>
-                    @endif
-                </div>
+                }}
+                @if ($errors->has('CAT_ICONE'))
+                <span class='text-danger'> {{ $errors->first('CAT_ICONE') }} </span>
+                @endif
 
             </div>
 
-            <div class='modal-footer'>
-                <button type='reset' class='btn btn-default waves-effect'>Resetar</button>
-                <button type='submit' class='btn btn-primary waves-effect waves-light'>Salvar Dados</button>
+            <div class='input-field col-md-3'>
+                <label>COR DO TOPO</label>
+                {!! Form::text('CAT_CORTOPO', null, ['class' => 'jscolor form-control']) !!}
+                @if ($errors->has('CAT_CORTOPO'))
+                <span class='text-danger'> {{ $errors->first('CAT_CORTOPO') }} </span>
+                @endif
             </div>
-            {!! Form::close() !!}
+            <div class='input-field col-md-2'>
+                <label>FONTE (TOPO)</label>
+                {!! Form::text('CAT_CORFONTETOPO', null, ['class' => 'jscolor form-control']) !!}
+                @if ($errors->has('CAT_CORFONTETOPO'))
+                <span class='text-danger'> {{ $errors->first('CAT_CORFONTETOPO') }} </span>
+                @endif
+            </div>
 
+            <div class='col-md-2'>
+                <label>*LINK NO TOPO?</label>
+                {{ Form::select('CAT_LINKTOPO', [
+                                'S' => 'SIM',
+                                'N' => 'NÃO',
+                            ], null, ['class' => 'form-control', 'required' => 'yes'])
+                }}
+                @if ($errors->has('CAT_LINKTOPO'))
+                <span class='color-danger'> {{ $errors->first('CAT_LINKTOPO') }} </span>
+                @endif
+            </div>
+            <div class='col-md-2'>
+                <label>*LINK NO RODAPÉ?</label>
+                {{ Form::select('CAT_LINKFOOTER', [
+                                'S' => 'SIM',
+                                'N' => 'NÃO',
+                            ], null, ['class' => 'form-control', 'required' => 'yes'])
+                }}
+                @if ($errors->has('CAT_LINKFOOTER'))
+                <span class='color-danger'> {{ $errors->first('CAT_LINKFOOTER') }} </span>
+                @endif
+            </div>
         </div>
+
+        <div class='row'>
+            <hr/>
+            <button type='reset' class='btn btn-default waves-effect'>Resetar</button>
+            <button type='submit' class='btn btn-primary waves-effect waves-light'>Salvar Dados</button>
+        </div>
+        {!! Form::close() !!}
     </div>
 </div>
 
 
 @push('css')
-<link rel='stylesheet' href='{{url('/assets/restrict/css/selectIcon.css')}}'/>
-<!--<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet"/>-->
-
 @endpush
 
 @push('js-topo')
 @endpush
 
 @push('js-footer')
-<script src='{{url('/assets/restrict/js/plugins/jscolor.min.js')}}'></script>
 @endpush
 
 @endsection

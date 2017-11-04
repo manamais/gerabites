@@ -12,12 +12,15 @@ class CreateComentariosTable extends Migration {
 
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            
+            $table->integer('COM_COM_CODIGO')->nullable()->unsigned();
+            $table->foreign('COM_COM_CODIGO')->references('COM_CODIGO')->on('comentarios')->onDelete('cascade');
 
             $table->integer('PROJ_CODIGO')->unsigned();
             $table->foreign('PROJ_CODIGO')->references('PROJ_CODIGO')->on('projetos')->onDelete('cascade');
 
             $table->text('COM_TEXTO');
-            $table->string('COM_IMAGEM', 80)->nullable();
+            $table->string('COM_VISIVELAOCLIENTE', 3);
 
             $table->timestamps();
             $table->softDeletes();

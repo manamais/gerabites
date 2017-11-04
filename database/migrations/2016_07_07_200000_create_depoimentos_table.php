@@ -14,6 +14,7 @@ class CreateDepoimentosTable extends Migration {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->text('DEP_TEXTO');
+            $table->string('DEP_STATUS',20);
 
             $table->timestamps();
             $table->softDeletes();

@@ -20,7 +20,29 @@ class ConfigEmpresaController extends StandardController {
         $this->request = $request;
         $this->page = "empresas";
         $this->titulo = "CONFIGURAÇÕES DA EMPRESA";
-        $this->gate = 'SECRETARIA';
+        $this->gate = 'COMPANY';
+    }
+    
+    
+    public function deletar($id) {
+        $gate = $this->gate;
+        if (Gate::denies("$gate")) {
+            abort(403, 'Não Autorizado!');
+        }
+        if($id==1){
+            abort(403, 'Não Autorizado!');
+        }
+        $item = $this->model->find($id);
+        $deleta = $item->delete();
+
+        if ($deleta) {
+            return '1';
+        } else {
+            alert()->error('Pressione F5 e verifique se o arquivo continua na lista. Caso o erro persista, entre em contato com a Administração.', 'Erro na exclusÃ£o!')->autoclose(4500);
+            return redirect("$this->redirectIndex")
+                            ->with('page', $this->page)
+                            ->with('titulo', $this->titulo);
+        }
     }
 
 }

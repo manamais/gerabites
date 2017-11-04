@@ -42,7 +42,7 @@ class ConfigLayoutsMasterController extends StandardController {
         $dadosForm = $this->request->all();
         $foto = $this->request->file('LAY_IMAGEM');
         $nomeArquivo = "LAYOUT_$ultimoID";
-        $path = public_path('assets/restrict/images/layouts/');
+        $path = public_path('assets/img/layouts/');
         $uploadImage = Image::make($foto)->encode('png')->save($path . "$nomeArquivo.png");
 
         $imagem = array('LAY_IMAGEM' => "$nomeArquivo.png");
@@ -80,7 +80,7 @@ class ConfigLayoutsMasterController extends StandardController {
 
         if ($foto != null) {
             $nomeArquivo = "LAYOUT_$id";
-            $path = public_path('assets/restrict/images/layouts/');
+            $path = public_path('assets/img/layouts/');
             $uploadImage = Image::make($foto)->encode('png')->save($path . "$nomeArquivo.png");
 
             $imagem = array('LAY_IMAGEM' => "$nomeArquivo.png");

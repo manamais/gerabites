@@ -14,12 +14,12 @@ class ManagerCategoriasController extends StandardController {
     protected $page;
     protected $gate;
     protected $nomeView = 'restrito.manager-categoria';
-    protected $redirectIndex = '/restrito/categorias';
+    protected $redirectIndex = '/restrito/posts/categorias';
 
     public function __construct(Categorias $model, Request $request) {
         $this->model = $model;
         $this->request = $request;
-        $this->page = "categorias";
+        $this->page = "posts/categorias";
         $this->titulo = "GERENCIAMENTO DAS CATEGORIAS";
         $this->gate = 'SECRETARIA';
     }

@@ -52,7 +52,7 @@ class ConfigSistemaController extends StandardController {
                                     ->with('titulo', $this->titulo);
                 } else {
                     //dd('nao encontrou falhas');
-                    $path = public_path('assets/restrict/images/');
+                    $path = public_path('assets/img/');
                     $image = Image::make($logoTopo)->encode('png');
                     $image->resize(360, 100);
                     $image->save($path . "logoTopo.png");
@@ -87,7 +87,7 @@ class ConfigSistemaController extends StandardController {
                                     ->with('titulo', $this->titulo);
                 } else {
                     //dd('nao encontrou falhas');
-                    $path = public_path('assets/restrict/images/');
+                    $path = public_path('assets/img/');
                     $image = Image::make($logoRodape)->encode('png');
                     $image->resize(360, 100);
                     $image->save($path . "logoRodape.png");
@@ -122,7 +122,7 @@ class ConfigSistemaController extends StandardController {
                                     ->with('titulo', $this->titulo);
                 } else {
                     //dd('nao encontrou falhas');
-                    $path = public_path('assets/restrict/images/');
+                    $path = public_path('assets/img/');
                     $image = Image::make($favicon)->encode('png');
                     $image->resize(30, 30);
                     $image->save($path . "favicon.png");
@@ -146,6 +146,12 @@ class ConfigSistemaController extends StandardController {
 
         $validator = validator($dadosForm, $rulesTratada);
 
+        
+                
+          if( $validator->fails() ) {
+          $messages = $validator->messages();
+          return $messages;
+          }
         if ($validator->fails()) {
             alert()->error('Houve um erro no registro. Corrija e tente novamente!', 'Falha na inserção!')->autoclose(4500);
             return redirect()->back()

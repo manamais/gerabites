@@ -49,7 +49,8 @@ class StandardController extends BaseController {
           $messages = $validator->messages();
           return $messages;
           }
-         */
+        */
+
         if ($validator->fails()) {
             alert()->error('Houve um erro no registro. Corrija e tente novamente!', 'Falha na inserção!')->autoclose(4500);
             return redirect()->back()

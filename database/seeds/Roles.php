@@ -23,46 +23,33 @@ class Roles extends Seeder {
                 ],
                 [
                     'id' => 3,
-                    'name' => 'REPORTER-COLUNISTA',
-                    'label' => 'Perfil de Usuário com permissões restritas a criação e edição de suas próprias matérias ou colunas.',
+                    'name' => 'FUNCIONÁRIO',
+                    'label' => 'Usuário com permissões de intereações com projetos e clientes.',
                     'created_at' => date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s'),
                 ],
                 [
                     'id' => 4,
-                    'name' => 'REPORTER-EDITOR',
-                    'label' => 'Perfil de Usuário que permite além de gerenciar suas matérias, a publicação dos documentos sem prévia autorização do editor.',
+                    'name' => 'FINANCEIRO',
+                    'label' => 'Perfil de Usuário com permissões para acompanhar as finanças da empresa.',
                     'created_at' => date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s'),
                 ],
                 [
                     'id' => 5,
-                    'name' => 'EDITOR',
-                    'label' => 'Perfil com gerenciamento total no que diz respeito as matérias. Pode ainda criar documentos, posições, editorias, páginas, enquetes, e gerenciar as publicidades.',
+                    'name' => 'BLOGUEIRO',
+                    'label' => 'Usuário com permissões inerentes aos Blogs da empresa.',
                     'created_at' => date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s'),
                 ],
                 [
                     'id' => 6,
-                    'name' => 'COLUNISTA-SOCIAL',
-                    'label' => 'Acesso restrito a Coluna Social',
+                    'name' => 'CLIENTE',
+                    'label' => 'Perfil de Usuário para acompanhar finanças, orçamento, andamento do projeto, etc.',
                     'created_at' => date('Y-m-d H:i:s'),
                     'updated_at' => date('Y-m-d H:i:s'),
                 ],
-                [
-                    'id' => 7,
-                    'name' => 'CLIENTE-ANUNCIANTE',
-                    'label' => 'Usuário com acesso as informações de sua conta referente aos anúncios postados no site.',
-                    'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s'),
-                ],
-                [
-                    'id' => 8,
-                    'name' => 'USUARIO-CLIENTE',
-                    'label' => 'Usuário com acesso matérias restritas no site.',
-                    'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s'),
-                ],
+                
             ]);
         } else {
             echo "\e[31m Roles não é uma tabela vazia. Não foi efetuado o Seed.\e";

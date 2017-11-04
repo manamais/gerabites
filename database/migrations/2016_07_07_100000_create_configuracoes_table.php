@@ -18,8 +18,8 @@ class CreateConfiguracoesTable extends Migration {
             $table->string('CONFIG_METAKEYWORDS', 255);
             $table->string('CONFIG_URLTERMODEUSO', 120);
             $table->text('CONFIG_CODGOOGLE')->nullable();
-            $table->text('CONFIG_EJORNAL_API');
-            $table->text('CONFIG_EJORNAL_SENHA');
+            $table->text('CONFIG_API');
+            $table->text('CONFIG_SENHA');
             $table->timestamps();
             $table->softDeletes();
         });
