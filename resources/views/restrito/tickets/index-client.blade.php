@@ -12,6 +12,7 @@
     <a href='{{url("/restrito/$page/cadastrar")}}' class='btn btn-sm btn-primary pull-right white'>Abrir chamado</a>
 </h3>
 
+
 <div class='row'>
     <div class='col-sm-4'>
         <div class='content-box'>
@@ -57,6 +58,7 @@
     <div class='col-sm-8'>
         <div class='content-box'>
             <div class='content'>
+                @if(isset($cod) && $cod!=0)
                 <div class='clients-list'>
                     <div class='btn-group info'>
                         <button type='button' class='btn btn-info btn-sm'>Alterar Status</button>
@@ -70,17 +72,7 @@
                             <li><a href='#'>Pendente</a></li>
                         </ul>
                     </div>
-
-
-
                     @foreach($ultimoTicket as $ut)
-                    @php
-                    
-                    @endphp
-
-
-
-
                     <table width='100%' class='m-t-30' >
                         <tr>
                             @if($ut->foto != '')
@@ -116,8 +108,6 @@
                                             <i class='zmdi zmdi-time'></i>
                                             {{ \Carbon\Carbon::parse($ut->criadoem)->format('d/m/Y G:i')}}
                                         </span>
-
-
                                     </p>
                                     <br/>
                                     {{$ut->TICK_MENSAGEM}}
@@ -133,22 +123,21 @@
                     'enctype'=>'multipart/form-data', 'form-send'=> "restrito/$page/cadastrar" ]) !!}
                     <div class='row m-t-20'>
                         <div class='input-field col-md-12'>
-                            <label>MENSAGEM</label>
+                             <label>MENSAGEM
+                                <button type='submit' class='btn btn-primary waves-effect waves-light pull-right'>Enviar</button>
+                            </label>
                             {!! Form::textarea('TICK_MENSAGEM', null, ['class' => 'form-control', 'rows'=>'5']) !!}
                             @if ($errors->has('TICK_MENSAGEM'))
                             <span class='text-danger'> {{ $errors->first('TICK_MENSAGEM') }} </span>
                             @endif
                         </div>
                     </div>
-                    <div class='row'>
-                        <hr/>
-                        <button type='submit' class='btn btn-primary waves-effect waves-light'>Enviar</button>
-                    </div>
                     {!! Form::close() !!}
 
 
 
                 </div>
+                @endif
             </div>
         </div>
     </div>

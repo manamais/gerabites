@@ -16,6 +16,7 @@ class Tickets extends Model implements AuditableContract {
     protected $primaryKey = 'TICK_CODIGO';
     protected $fillable = [
         'user_id',
+        'user_id_funcionario',
         'TICK_ASSUNTO',
         'TICK_DEPARTAMENTO',
         'TICK_PRIORIDADE',
@@ -23,6 +24,7 @@ class Tickets extends Model implements AuditableContract {
     ];
     public $rules = [
         'user_id' => 'required|numeric',
+        'user_id_funcionario' => 'numeric',
         'TICK_ASSUNTO' => 'required|max:60',
         'TICK_DEPARTAMENTO' => 'required|max:40',
         'TICK_PRIORIDADE' => 'required|max:15',

@@ -49,13 +49,47 @@
             </div>
             <div class='input-field col-md-7'>
                 <label>ASSUNTO</label>
-                {!! Form::text('TICK_ASSUNTO', null, ['required' => 'yes', 'class' => 'form-control']) !!}
+                {!! Form::text('TICK_ASSUNTO', null, ['maxlength' => '60', 'required' => 'yes', 'class' => 'form-control']) !!}
                 @if ($errors->has('TICK_ASSUNTO'))
                 <span class='text-danger'> {{ $errors->first('TICK_ASSUNTO') }} </span>
                 @endif
 
             </div>
         </div>
+
+
+        @can('COMPANY')
+        <div class='row m-t-20'>
+            <div class='input-field col-md-9'>
+                <label>RELATAR A:</label>
+                <select name='user_id_funcionario' class='form-control' autocomplete='yes' >
+                    @foreach($users as $user)
+                    <option @if(isset($data->user_id_funcionario) && ($data->user_id_funcionario==$user->id)) @php echo 'selected'; @endphp @endif value="{{$user->id}}" >{{$user->name}}</option>
+                    @endforeach
+                </select>
+                @if ($errors->has('user_id_funcionario'))
+                <span class='text-danger'> {{ $errors->first('user_id_funcionario') }} </span>
+                @endif
+            </div>
+
+            <div class='input-field col-md-3'>
+                <label>STATUS</label>
+                {{ Form::select('TICK_STATUS', [
+                                'Aberto' => 'Aberto',
+                                'Em Análise' => 'Em Análise',
+                                'Em Produção' => 'Em Produção',
+                                'Resolvido' => 'Resolvido',
+                            ], null, ['class' => 'form-control', 'required' => 'yes'])
+                }}
+                @if ($errors->has('TICK_STATUS'))
+                <span class='text-danger'> {{ $errors->first('TICK_STATUS') }} </span>
+                @endif
+            </div>
+        </div>
+        @endcan
+
+
+
 
         <div class='row'>
             <hr/>

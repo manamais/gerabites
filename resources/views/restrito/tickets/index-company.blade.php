@@ -9,8 +9,9 @@
 
 <h3 class='section-title first-title'>
     {{$titulo}}
-    <a href='{{url("/restrito/$page/cadastrar")}}' class='btn btn-sm btn-primary pull-right white'>Abrir chamado</a>
 </h3>
+
+
 
 <div class='row'>
     <div class='col-sm-4'>
@@ -42,7 +43,18 @@
                                     <button class='btn {{$cor}} btn-xs'>
                                         {{$registro->TICK_STATUS}}
                                     </button>
-                                    <p class='f-10'>08:00</p>
+                                    <p class='f-10'>{{$registro->created_at}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan='2' class='p-b-5'>
+                                    <a href='#' class='btn btn-default btn-xs white m-r-5'
+                                       onclick='deletar("{{url("/restrito/tickets/editar/$registro->TICK_CODIGO")}}")' id='urlDeletar' >
+                                        <i class='zmdi zmdi-delete'></i> Del
+                                    </a>
+                                    <a href='{{url("/restrito/tickets/editar/$registro->TICK_CODIGO")}}' class='btn btn-primary btn-xs white'>
+                                        <i class='zmdi zmdi-edit'></i> Edit
+                                    </a>
                                 </td>
                             </tr>
                         </table>
@@ -57,6 +69,7 @@
     <div class='col-sm-8'>
         <div class='content-box'>
             <div class='content'>
+                @if(isset($cod) && $cod!=0)
                 <div class='clients-list'>
                     <div class='btn-group info'>
                         <button type='button' class='btn btn-info btn-sm'>Alterar Status</button>
@@ -126,22 +139,21 @@
                     'enctype'=>'multipart/form-data', 'form-send'=> "restrito/$page/cadastrar" ]) !!}
                     <div class='row m-t-20'>
                         <div class='input-field col-md-12'>
-                            <label>MENSAGEM</label>
+                            <label>MENSAGEM
+                                <button type='submit' class='btn btn-primary waves-effect waves-light pull-right'>Enviar</button>
+                            </label>
                             {!! Form::textarea('TICK_MENSAGEM', null, ['class' => 'form-control', 'rows'=>'5']) !!}
                             @if ($errors->has('TICK_MENSAGEM'))
                             <span class='text-danger'> {{ $errors->first('TICK_MENSAGEM') }} </span>
                             @endif
                         </div>
                     </div>
-                    <div class='row'>
-                        <hr/>
-                        <button type='submit' class='btn btn-primary waves-effect waves-light'>Enviar</button>
-                    </div>
                     {!! Form::close() !!}
 
 
 
                 </div>
+                @endif
             </div>
         </div>
     </div>

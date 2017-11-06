@@ -46,9 +46,9 @@
             <div class='col-md-2'>
                 <label>TIPO</label>
                 {{ Form::select('PROD_TIPO', [
-                                'PRODUTO' => 'PRODUTO',
-                                'HORA' => 'HORA',
-                                'MENSALIDADE' => 'MENSALIDADE',
+                                'Produto' => 'Produto',
+                                'Hora' => 'Hora',
+                                'Mensalidade' => 'Mensalidade',
                             ], null, ['class' => 'form-control', 'required' => 'yes'])
                 }}
                 @if ($errors->has('PROD_TIPO'))

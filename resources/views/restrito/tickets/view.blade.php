@@ -129,18 +129,15 @@
                     'enctype'=>'multipart/form-data', 'form-send'=> "restrito/$page/cadastrar" ]) !!}
                     <div class='row m-t-20'>
                         <div class='input-field col-md-12'>
-                            <label>MENSAGEM</label>
+                            <label>MENSAGEM
+                            </label>
+                                <button type='submit' class='btn btn-primary waves-effect waves-light pull-right'>Enviar</button>
                             {!! Form::textarea('TICK_MENSAGEM', null, ['class' => 'form-control', 'rows'=>'5']) !!}
                             @if ($errors->has('TICK_MENSAGEM'))
                             <span class='text-danger'> {{ $errors->first('TICK_MENSAGEM') }} </span>
                             @endif
                         </div>
                     </div>
-                    <div class='row'>
-                        <hr/>
-                        <button type='submit' class='btn btn-primary waves-effect waves-light'>Enviar</button>
-                    </div>
-                    {!! Form::close() !!}
 
 
 
